@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <title>Search Page</title>
+</head>
+<body>
+
+
+  <div class="container">
+  
+    <div class = "row">
+      <div class"row">
+        <%= form_tag({controller: "ambulances", action: "search"}, method: "get") do %>
+        <%= label_tag(:emergency_type_label,  "Type of Emergency :") %>
+        <span class = "row">
+          <%= label_tag :emergency_type, "Van", value: 1 %>
+          <%= radio_button_tag :emergency_type, 1 %>
+
+          <%= label_tag :emergency_type, "First Aid", value: 2 %>
+          <%= radio_button_tag :emergency_type, 2 %>
+
+          <%= label_tag :emergency_type, "Cardiac", value: 3 %>
+          <%= radio_button_tag :emergency_type, 3 %>
+        </span>
+        <div class="row">
+          <%= label_tag(:patient_loc_tag, "Enter Patient Location :") %>
+          <%= text_field_tag(:patient_loc, nil, placeholder: 'e.g. Ganadham, Pune') %>
+          <%= submit_tag("Search") %>
+          <% end %>
+        </div> <!-- ./Well -->
+      </div> <!-- Offset4 span4 -->
+    </div> <!-- row -->
+
+
+  </div> <!-- ./container -->
+
+
+</body>
+</html>

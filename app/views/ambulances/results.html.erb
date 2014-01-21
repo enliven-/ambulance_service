@@ -1,0 +1,50 @@
+<h3>Listing ambulances</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patient Location</th>
+      <th>Emergency Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @dest_loc %></td>
+      <td><%= @emergency_label %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ambulance ID</th>
+      <th>Current Location</th>
+      <th>Equipment Level</th>
+      <th>Exp. Time to Reach</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @amb_prox_pairs.nil? %>
+      <% @amb_prox_pairs.each do |amb_prox| %>
+        <tr>
+          <td><%= amb_prox[0].id %></td>
+          <td><%= amb_prox[0].current_loc %></td>
+          <td><%= amb_prox[0].equipment_level_label %></td>
+          <td><%= amb_prox[1] %> mins</td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% @amb_prox_pairs.each do |amb_prox| %>
+        <tr>
+          <td><%= amb_prox[0].id %></td>
+          <td><%= amb_prox[0].current_loc %></td>
+          <td><%= amb_prox[0].equipment_level_label %></td>
+          <td><%= amb_prox[1] %> mins</td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

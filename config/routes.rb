@@ -1,9 +1,12 @@
 AmbulanceService::Application.routes.draw do
+  resources :ambulances
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root  'ambulances#home'
+  get   'search' => 'ambulances#search'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

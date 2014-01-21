@@ -47,3 +47,9 @@ end
 gem 'foundation-rails'
 
 gem 'simple_form'
+
+gem 'geocoder'
+
+gem 'google_directions'
+
+gem 'nokogiri'
