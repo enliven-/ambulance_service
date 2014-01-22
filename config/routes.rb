@@ -7,6 +7,7 @@ AmbulanceService::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root  'ambulances#home'
   get   'search' => 'ambulances#search'
+  get   'update' => 'ambulances#update_ambulance'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

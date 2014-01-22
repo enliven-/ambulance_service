@@ -5,8 +5,10 @@
   <h3>Editing ambulance</h3>
 
   <%= render 'form' %>
+ 
+  <%= link_to 'Show', @ambulance %> |
+  <%= link_to 'Back', ambulances_path %> 
   
   </div>
 </div>
-<%= link_to 'Show', @ambulance %> |
-<%= link_to 'Back', ambulances_path %>
+

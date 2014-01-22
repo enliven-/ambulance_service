@@ -23,6 +23,20 @@ class AmbulancesController < ApplicationController
     render 'results'
   end
 
+  def update_ambulance
+    lat  = params[:lat]
+    long = params[:long]
+    free = !params[:free].to_i.zero?
+    id   = params[:id]
+    amb  = Ambulance.find(id)
+    amb.latitude   = lat.to_f
+    amb.longitude  = long.to_f
+    amb.free  = free
+    amb.current_loc = Geocoder.search(lat + "," + long)
+    amb.save
+    respond_to do |format| format.html { render text: "OK" } end
+  end
+
   # GET /ambulances
   # GET /ambulances.json
   def index
