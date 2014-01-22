@@ -1,39 +1,58 @@
-<html>
-
-<head>
-  <title>Search Page</title>
-</head>
-<body>
 
 
-  <div class="container">
-  
-    <div class = "row">
-      <div class"row">
-        <%= form_tag({controller: "ambulances", action: "search"}, method: "get") do %>
-        <%= label_tag(:emergency_type_label,  "Type of Emergency :") %>
-        <span class = "row">
-          <%= label_tag :emergency_type, "Van", value: 1 %>
-          <%= radio_button_tag :emergency_type, 1 %>
 
-          <%= label_tag :emergency_type, "First Aid", value: 2 %>
-          <%= radio_button_tag :emergency_type, 2 %>
-
-          <%= label_tag :emergency_type, "Cardiac", value: 3 %>
-          <%= radio_button_tag :emergency_type, 3 %>
-        </span>
+  <div class="row">
+    <div class="medium-6 medium-centered columns center">
+      <%= form_tag({controller: "ambulances", action: "search"}, method: "get") do %>
+           
         <div class="row">
-          <%= label_tag(:patient_loc_tag, "Enter Patient Location :") %>
-          <%= text_field_tag(:patient_loc, nil, placeholder: 'e.g. Ganadham, Pune') %>
-          <%= submit_tag("Search") %>
-          <% end %>
-        </div> <!-- ./Well -->
-      </div> <!-- Offset4 span4 -->
-    </div> <!-- row -->
+          <div class="medium-12 columns">
+            <%= label_tag(:patient_loc_label, "Patient Address :") %>
+            <%= text_field_tag(:patient_loc, nil, placeholder: 'e.g. A201 Ashwani Paradise') %>
+          </div>
+        </div>
+
+        <div class="row">
+          <br />
+        </div>
+
+        <div class="row">
+          <div class="medium-9 columns">
+            <%= label_tag(:emergency_type, "Type of Emergency :") %>
+            
+            <span class="em-radio">
+            <%= radio_button_tag :emergency_type, 1 %>
+            <%= label_tag :emergency_type, "Van", value: 1 %>
+            </span>
+
+            <span class="em-radio">
+            <%= radio_button_tag :emergency_type, 2 %>
+            <%= label_tag :emergency_type, "First Aid", value: 2 %>
+            </span>
+
+            <span class="em-radio">
+            <%= radio_button_tag :emergency_type, 3 %>
+            <%= label_tag :emergency_type, "Cardiac", value: 3 %>
+            </span>
+
+          </div>
 
 
-  </div> <!-- ./container -->
+          <div class="medium-3 columns">
+            <input class="button small radius" name="commit" type="submit" value="Submit">
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
 
 
-</body>
-</html>
+
+<style>
+.em-radio {
+  padding: 10px;
+  border:  10px;
+}
+</style>

@@ -1,33 +1,39 @@
-<h1>Listing ambulances</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Ambulance ID</th>
-      <th>Current Location</th>
-      <th>Equipment Level</th>
-      <th>Free?</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="medium-9 medium-centered columns center">
 
-  <tbody>
-    <% @ambulances.each do |ambulance| %>
+  <h3>Listing ambulances</h3>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= ambulance.id %></td>
-        <td><%= ambulance.current_loc %></td>
-        <td><%= ambulance.equipment_level_label %></td>
-        <td><%= ambulance.free %></td>
-        <td><%= link_to 'Show', ambulance %></td>
-        <td><%= link_to 'Edit', edit_ambulance_path(ambulance) %></td>
-        <td><%= link_to 'Destroy', ambulance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>ID</th>
+        <th>Current Location</th>
+        <th>Equipment Level</th>
+        <th>Free?</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @ambulances.each do |ambulance| %>
+        <tr>
+          <td><%= ambulance.id %></td>
+          <td><%= ambulance.current_loc %></td>
+          <td><%= ambulance.equipment_level_label %></td>
+          <td><%= ambulance.free %></td>
+          <td><%= link_to 'Show', ambulance %></td>
+          <td><%= link_to 'Edit', edit_ambulance_path(ambulance) %></td>
+          <td><%= link_to 'Destroy', ambulance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  </div>
+</div>
 
 <br>
 

@@ -49,6 +49,15 @@ module ApplicationHelper
       end
     end
 
+    def drive_time_in_secs
+      if @status != "OK"
+        drive_time = 0
+      else
+        drive_time = @doc.css("duration value").last.text
+        convert_to_secs(drive_time)
+      end
+    end
+
     def drive_time
       if @status != "OK"
         drive_time = 0
@@ -107,6 +116,10 @@ module ApplicationHelper
 
       def convert_to_hours(text)
         (text.to_f / 60 / 60).round(2)
+      end
+
+      def convert_to_secs(text)
+        text.to_f
       end
 
       def transcribe(location)
