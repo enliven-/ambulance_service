@@ -19,7 +19,7 @@ module ApplicationHelper
       :sensor => :false,
       :mode => :driving,
       :departure_time => Time.now.to_i,
-      :region => "in",
+      # :region => "in",
     }
 
     def initialize(origin, destination, opts=@@default_options)

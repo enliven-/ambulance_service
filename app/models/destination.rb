@@ -1,4 +1,4 @@
 class Destination < ActiveRecord::Base
   geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode
 end

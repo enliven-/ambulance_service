@@ -9,6 +9,10 @@ AmbulanceService::Application.routes.draw do
   get   'search' => 'ambulances#search'
   get   'update' => 'ambulances#update_ambulance'
 
+  get   'test'   => 'application#test'
+  get   'tests'  => 'application#tests'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

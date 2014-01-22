@@ -12,26 +12,26 @@ class AmbulancesController < ApplicationController
     free_ambs                 = Ambulance.select { |a| a.free? }
 
     @ambs                     = free_ambs.select {|a| emergency_type <= a.equipment_level }
-    @amb_prox_pairs           = @ambs.zip( @ambs.map {|a| a.proximity(@dest_loc) } )
-    @amb_prox_pairs.sort! { |ap1, ap2| ap1[1] <=> ap2[1] }
+    @amb_prox_pairs           = @ambs.zip( @ambs.map {|a| a.proximity(@patient_address) } )
+    @amb_prox_pairs.sort!       { |ap1, ap2| ap1[1] <=> ap2[1] }
 
     if @amb_prox_pairs.nil? or @amb_prox_pairs.first[1] > 30
-      @amb_prox_pairs         = free_ambs.zip( free_ambs.map {|a| a.proximity(@dest_loc) } )
-      @amb_prox_pairs.sort! { |ap1, ap2| (emergency_type-ap1[0].equipment_level)*10 + ap1[1] <=> (emergency_type-ap2[0].equipment_level)*10 + ap2[1] }
+      @amb_prox_pairs         = free_ambs.zip( free_ambs.map {|a| a.proximity(@patient_address) } )
+      @amb_prox_pairs.sort!   { |ap1, ap2| (emergency_type-ap1[0].equipment_level)*10 + ap1[1] <=> (emergency_type-ap2[0].equipment_level)*10 + ap2[1] }
     end
 
     render 'results'
   end
 
   def update_ambulance
-    ambulance             = Ambulance.find(id)
+    ambulance             = Ambulance.find(params[:id])
     ambulance.latitude    = params[:latitude].to_f
     ambulance.longitude   = params[:longitude].to_f
     ambulance.free        = !params[:free].to_i.zero?
 
     if ambulance.save
       render text: "OK"
-    else:
+    else
       render text: "Failed"
     end
 

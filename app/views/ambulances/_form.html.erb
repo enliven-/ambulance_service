@@ -3,7 +3,9 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-    <%= f.input :current_loc,       label: "Current Location" %>
+    <%= f.input :latitude,       label: "Latitude" %>
+    <%= f.input :longitude,      label: "Longitude" %>
+
     <%#= f.label: "Equipment Level: " %>
     <%= f.collection_radio_buttons  :equipment_level, [[1, "Van"], [2, "First Aid"], [3, "Cardiac"]], :first, :last %>
     <%= f.input :free,              as: :radio_buttons %>

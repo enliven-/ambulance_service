@@ -21,7 +21,7 @@
       <% @ambulances.each do |ambulance| %>
         <tr>
           <td><%= ambulance.id %></td>
-          <td><%= ambulance.current_loc %></td>
+          <td><%= ambulance.address %></td>
           <td><%= ambulance.equipment_level_label %></td>
           <td><%= ambulance.free %></td>
           <td><%= link_to 'Show', ambulance %></td>

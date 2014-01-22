@@ -1,10 +1,10 @@
 class Ambulance < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
-  after_validation    :reverse_geocode, :if => :address_changed?
+  after_validation    :reverse_geocode
 
   def proximity dest_loc
-    src     = Geocoder.search(current_loc)
+    src     = Geocoder.search(address)
     slat    = src[0].latitude
     slong   = src[0].longitude
     src_f   = slat.to_s+","+slong.to_s
