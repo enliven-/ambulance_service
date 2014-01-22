@@ -1,7 +1,7 @@
 class Ambulance < ActiveRecord::Base
 
-  reverse_geocoded_by :latitude, :longitude, address: :current_loc
-  after_validation    :reverse_geocode
+  reverse_geocoded_by :latitude, :longitude
+  after_validation    :reverse_geocode, :if => :address_changed?
 
   def proximity dest_loc
     src     = Geocoder.search(current_loc)
@@ -18,9 +18,9 @@ class Ambulance < ActiveRecord::Base
     time    = route.drive_time_in_minutes
   end
 
-  def address
-    self.current_loc
-  end
+  # def address
+  #   self.current_loc
+  # end
 
   def equipment_level_label
     label = "None"

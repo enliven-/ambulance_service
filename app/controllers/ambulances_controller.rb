@@ -6,7 +6,7 @@ class AmbulancesController < ApplicationController
   end
 
   def search
-    @dest_loc                 = params[:patient_loc]
+    @patient_address          = params[:patient_address]
     emergency_type            = params[:emergency_type].to_i
     @emergency_label          = Ambulance.emergency_label(emergency_type)
     free_ambs                 = Ambulance.select { |a| a.free? }
@@ -24,17 +24,17 @@ class AmbulancesController < ApplicationController
   end
 
   def update_ambulance
-    lat  = params[:lat]
-    long = params[:long]
-    free = !params[:free].to_i.zero?
-    id   = params[:id]
-    amb  = Ambulance.find(id)
-    amb.latitude   = lat.to_f
-    amb.longitude  = long.to_f
-    amb.free  = free
-    amb.current_loc = Geocoder.search(lat + "," + long)
-    amb.save
-    respond_to do |format| format.html { render text: "OK" } end
+    ambulance             = Ambulance.find(id)
+    ambulance.latitude    = params[:latitude].to_f
+    ambulance.longitude   = params[:longitude].to_f
+    ambulance.free        = !params[:free].to_i.zero?
+
+    if ambulance.save
+      render text: "OK"
+    else:
+      render text: "Failed"
+    end
+
   end
 
   # GET /ambulances
@@ -104,6 +104,6 @@ class AmbulancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ambulance_params
-      params[:ambulance].permit(:current_loc, :free, :equipment_level)
+      params[:ambulance].permit(:latitude, :longitude, :free, :equipment_level)
     end
 end
