@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140122120422) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "equipment_level"
+    t.string   "contact"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,6 +28,8 @@ ActiveRecord::Schema.define(version: 20140122120422) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "contact"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

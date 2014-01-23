@@ -13,6 +13,18 @@
         </div>
 
         <div class="row">
+          <div class="medium-6 columns">
+            <%= label_tag(:patient_phone_label, "Patient Phone :") %>
+            <%= text_field_tag(:patient_phone, nil, placeholder: 'e.g. 9888193362') %>
+          </div>
+          <div class="medium-6 columns">
+            <%= label_tag(:patient_name_label,  "Patient Name :") %>
+            <%= text_field_tag(:patient_name) %>
+          </div>
+        </div>
+
+
+        <div class="row">
           <br />
         </div>
 

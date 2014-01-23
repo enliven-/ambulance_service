@@ -37,9 +37,9 @@
             <td><%= amb_prox[0].id %></td>
             <td><%= amb_prox[0].address %></td>
             <td><%= amb_prox[0].equipment_level_label %></td>
-            <td><%= "9888495744" %></td>
+            <td><%= amb_prox[0].contact %></td>
             <td><%= amb_prox[1] %> mins</td>
-            <td><%= button_to "Dispatch" , { controller: "ambulances", action: "send_notification", patient_address: @patient_address, patient_contact: "9888193362", emergency: @emergency_label }, form_class: "button tiny radius" %></td>
+            <td><%= button_to "Dispatch" , { controller: "ambulances", action: "send_notification", ambulance_id: amb_prox[0].id, patient_address: @patient_address, patient_contact: @patient_contact, patient_name: @patient_name, emergency: @emergency_label }, :class => "button tiny radius" %></td>
           </tr>
         <% end %>
       </tbody>

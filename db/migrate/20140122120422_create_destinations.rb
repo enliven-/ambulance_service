@@ -4,6 +4,8 @@ class CreateDestinations < ActiveRecord::Migration
       t.string   :address
       t.float    :latitude
       t.float    :longitude
+      t.string   :contact
+      t.string   :name
       t.timestamps
     end
   end

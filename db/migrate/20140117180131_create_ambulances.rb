@@ -6,6 +6,7 @@ class CreateAmbulances < ActiveRecord::Migration
       t.float   :latitude
       t.float   :longitude
       t.integer :equipment_level
+      t.string  :contact
       t.timestamps
     end
   end

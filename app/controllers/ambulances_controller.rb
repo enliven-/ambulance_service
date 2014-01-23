@@ -11,6 +11,8 @@ class AmbulancesController < ApplicationController
 
   def search
     @patient_address          = params[:patient_address]
+    @patient_name             = params[:patient_name]
+    @patient_contact          = params[:patient_phone]
     emergency_type            = params[:emergency_type].to_i
     @emergency_label          = Ambulance.emergency_label(emergency_type)
     free_ambs                 = Ambulance.select { |a| a.free? }
@@ -103,17 +105,20 @@ class AmbulancesController < ApplicationController
 
 
   def send_notification
+    amb     = Ambulance.find(params[:ambulance_id])
+
     sid     = "MANDQ3ZJKWZJZINMIYNZ"
     token   = "MWE1NTdmMmI0YTAwMjA4NTgzMmE2YmJkYmFmMmVk"
     p       = RestAPI.new(sid, token)
-    text    = "Patient Address: " + params[:patient_address] + "  " + "Patient Contact: " + params[:patient_contact] + "  " + "Emergency Type: " + params[:emergency]
-    params  = {'src' =>  '14046927361', 
-               'dst' => '919779860223', 
+    text    = "Patient Address: " + params[:patient_address] + "  " + "Patient Contact: " + params[:patient_contact]+ "  " + "Patient Name: " + params[:patient_name] + "  " + "Emergency Type: " + params[:emergency]
+    dst     = "91" + amb.contact
+    params  = {'src' => '14046927361', 
+               'dst' => dst, 
                'text' => text,
                'type' => 'sms',
               }
     response = p.send_message(params)
-    render text: "Sent!"
+    render text: "Ambulance Dispatched."
   end
 
   private
@@ -124,6 +129,6 @@ class AmbulancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ambulance_params
-      params[:ambulance].permit(:latitude, :longitude, :free, :equipment_level)
+      params[:ambulance].permit(:latitude, :longitude, :free, :equipment_level, :contact)
     end
 end
