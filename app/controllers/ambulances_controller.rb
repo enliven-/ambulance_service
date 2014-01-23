@@ -1,4 +1,8 @@
 class AmbulancesController < ApplicationController
+
+  require 'plivo'
+  include Plivo
+
   before_action :set_ambulance, only: [:show, :edit, :update, :destroy]
 
 
@@ -94,6 +98,22 @@ class AmbulancesController < ApplicationController
       format.html { redirect_to ambulances_url }
       format.json { head :no_content }
     end
+  end
+
+
+
+  def send_notification
+    sid     = "MANDQ3ZJKWZJZINMIYNZ"
+    token   = "MWE1NTdmMmI0YTAwMjA4NTgzMmE2YmJkYmFmMmVk"
+    p       = RestAPI.new(sid, token)
+    text    = "Patient Address: " + params[:patient_address] + "  " + "Patient Contact: " + params[:patient_contact] + "  " + "Emergency Type: " + params[:emergency]
+    params  = {'src' =>  '14046927361', 
+               'dst' => '919779860223', 
+               'text' => text,
+               'type' => 'sms',
+              }
+    response = p.send_message(params)
+    render text: "Sent!"
   end
 
   private

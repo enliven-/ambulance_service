@@ -11,6 +11,7 @@ AmbulanceService::Application.routes.draw do
 
   get   'test'   => 'application#test'
   get   'tests'  => 'application#tests'
+  post  'sms'    => 'ambulances#send_notification'
 
 
   # Example of regular route:
