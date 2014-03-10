@@ -4,7 +4,7 @@ class AmbulancesController < ApplicationController
   include Plivo
 
   before_action :set_ambulance, only: [:show, :edit, :update, :destroy]
-
+  # before_filter :authenticate_user!
 
   def home
   end
@@ -110,10 +110,10 @@ class AmbulancesController < ApplicationController
     sid     = "MANDQ3ZJKWZJZINMIYNZ"
     token   = "MWE1NTdmMmI0YTAwMjA4NTgzMmE2YmJkYmFmMmVk"
     p       = RestAPI.new(sid, token)
-    text    = "Patient Address: " + params[:patient_address] + "  " + "Patient Contact: " + params[:patient_contact]+ "  " + "Patient Name: " + params[:patient_name] + "  " + "Emergency Type: " + params[:emergency]
+    text    = "Patient Address: " + params[:patient_address] + "\n" + "Patient Contact: " + params[:patient_contact]+ "\n" + "Patient Name: " + params[:patient_name] + "\n " + "Emergency Type: " + params[:emergency]
     dst     = "91" + amb.contact
-    params  = {'src' => '14046927361', 
-               'dst' => dst, 
+    params  = {'src'  => '14046927361', 
+               'dst'  => dst, 
                'text' => text,
                'type' => 'sms',
               }
