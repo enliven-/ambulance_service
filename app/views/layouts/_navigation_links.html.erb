@@ -1,0 +1,11 @@
+<%# add navigation links to this file %>
+<li class="divider"></li>
+<li class=""><a href="/ambulances">Ambulances</a></li>
+<li class="divider"></li>
+<li class="has-form show-for-large-up">
+  <% if user_signed_in? %>
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "medium radius alert button" %>
+  <% else %>
+  <%= link_to "Sign In", new_user_session_path, class: "medium radius alert button" %>
+  <% end %>
+</li>

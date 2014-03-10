@@ -46,6 +46,8 @@ end
 
 gem 'foundation-rails'
 
+gem 'rails_layout', group: :development
+
 gem 'simple_form'
 
 gem 'geocoder'

@@ -1,47 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AmbulanceService</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "vendor/modernizr" %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <nav class="top-bar" data-topbar="">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">Ambulance Service</a></h1>
-      </li>
-    </ul>
-
-
-    <section class="top-bar-section">
-
-      <ul class="right">
-        <li class="divider"></li>
-        <li class=""><a href="/ambulances">Ambulances</a></li>
-        <li class="divider"></li>
-        <li class="has-form show-for-large-up">
-          <% if user_signed_in? %>
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "medium radius alert button" %>
-          <% else %>
-          <%= link_to "Sign In", new_user_session_path, class: "medium radius alert button" %>
-          <% end %>
-        </li>
-      </ul>
-
-    </section>
-  </nav>
-
-  <div class="row"><br /><br /></div>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Ambulance Service" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ambulance Service" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%# Modernizr is required for Zurb Foundation %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
   
-  <div class="row">
-    <div class="medium-9 medium-centered columns center">
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
 
-    <%= yield %>
+    <div class="row"><br><br></div>
+    
+    <div class="row">
+      <div class="medium-9 medium-centered columns center">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+      </div>
     </div>
-  </div>
-</body>
+
+  </body>
 </html>
