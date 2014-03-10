@@ -24,16 +24,24 @@
         <li class=""><a href="/ambulances">Ambulances</a></li>
         <li class="divider"></li>
         <li class="has-form show-for-large-up">
-          <a href="http://foundation.zurb.com/docs" class="medium radius alert button">Sign Out</a>
+          <% if user_signed_in? %>
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "medium radius alert button" %>
+          <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "medium radius alert button" %>
+          <% end %>
         </li>
       </ul>
 
     </section>
   </nav>
-  
+
   <div class="row"><br /><br /></div>
+  
+  <div class="row">
+    <div class="medium-9 medium-centered columns center">
 
-  <%= yield %>
-
+    <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

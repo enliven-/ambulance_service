@@ -4,7 +4,7 @@ class AmbulancesController < ApplicationController
   include Plivo
 
   before_action :set_ambulance, only: [:show, :edit, :update, :destroy]
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def home
   end
@@ -19,11 +19,18 @@ class AmbulancesController < ApplicationController
 
     @ambs                     = free_ambs.select {|a| emergency_type <= a.equipment_level }
     @amb_prox_pairs           = @ambs.zip( @ambs.map {|a| a.proximity(@patient_address) } )
-    @amb_prox_pairs.sort!       { |ap1, ap2| ap1[1] <=> ap2[1] }
+    @amb_prox_pairs.sort!  { |ap1, ap2| ap1[1] <=> ap2[1] }
 
     if @amb_prox_pairs.nil? or @amb_prox_pairs.first[1] > 30
       @amb_prox_pairs         = free_ambs.zip( free_ambs.map {|a| a.proximity(@patient_address) } )
       @amb_prox_pairs.sort!   { |ap1, ap2| (emergency_type-ap1[0].equipment_level)*10 + ap1[1] <=> (emergency_type-ap2[0].equipment_level)*10 + ap2[1] }
+    end
+
+    @amb_prox_pairs.select! { |ap| ap[1] < Float::INFINITY }
+    
+    if @amb_prox_pairs.empty?
+      render text: "Either service is down, or there is no ambulance close enough to you in the system. \
+      Please try again, or use some other source." and return
     end
 
     render 'results'

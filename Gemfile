@@ -62,3 +62,4 @@ gem 'twilio-ruby'
 
 gem 'plivo'
 
+gem 'devise'

@@ -5,6 +5,11 @@ class Ambulance < ActiveRecord::Base
 
   def proximity dest_loc
     src     = Geocoder.search(address)
+
+    if src[0].nil?
+      return Float::INFINITY
+    end
+
     slat    = src[0].latitude
     slong   = src[0].longitude
     src_f   = slat.to_s+","+slong.to_s
