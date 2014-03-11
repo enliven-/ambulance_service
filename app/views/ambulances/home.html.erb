@@ -2,19 +2,19 @@
 
 
 
-      <%= form_tag({controller: "ambulances", action: "search"}, method: "get") do %>
+      <%= form_tag({controller: "ambulances", action: "search"}, method: "post") do %>
            
         <div class="row">
           <div class="medium-12 columns">
             <%= label_tag(:patient_address_label, "Patient Address :") %>
-            <%= text_field_tag(:patient_address, nil, placeholder: 'e.g. A201 Ashwani Paradise') %>
+            <%= text_field_tag(:patient_address, nil, placeholder: 'e.g. A201 Ashwani Paradise, Pune') %>
           </div>
         </div>
 
         <div class="row">
           <div class="medium-6 columns">
             <%= label_tag(:patient_phone_label, "Patient Phone :") %>
-            <%= text_field_tag(:patient_phone, nil, placeholder: 'e.g. 9888193362') %>
+            <%= text_field_tag(:patient_phone, nil, placeholder: 'e.g. +919888193362') %>
           </div>
           <div class="medium-6 columns">
             <%= label_tag(:patient_name_label,  "Patient Name :") %>

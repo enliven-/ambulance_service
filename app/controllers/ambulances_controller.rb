@@ -29,8 +29,9 @@ class AmbulancesController < ApplicationController
     @amb_prox_pairs.select! { |ap| ap[1] < Float::INFINITY }
     
     if @amb_prox_pairs.empty?
-      render text: "Either service is down, or there is no ambulance close enough to you in the system. \
-      Please try again, or use some other source." and return
+      redirect_to root_url, alert: "Either service is down, or there is no ambulance close enough to you in the system. \
+      Please try again, or use some other source."
+      return
     end
 
     render 'results'
@@ -118,14 +119,15 @@ class AmbulancesController < ApplicationController
     token   = "MWE1NTdmMmI0YTAwMjA4NTgzMmE2YmJkYmFmMmVk"
     p       = RestAPI.new(sid, token)
     text    = "Patient Address: " + params[:patient_address] + "\n" + "Patient Contact: " + params[:patient_contact]+ "\n" + "Patient Name: " + params[:patient_name] + "\n " + "Emergency Type: " + params[:emergency]
-    dst     = "91" + amb.contact
+    dst     = amb.contact
     params  = {'src'  => '14046927361', 
                'dst'  => dst, 
                'text' => text,
                'type' => 'sms',
               }
     response = p.send_message(params)
-    render text: "Ambulance Dispatched."
+    puts response, "--------------------------"
+    redirect_to root_url, notice: "Ambulance has been notified"
   end
 
   private
